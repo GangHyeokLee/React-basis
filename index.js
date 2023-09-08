@@ -24,6 +24,7 @@ app.post('/register', async (req, res)=>{
 
 
   const user = new User(req.body)
+  console.log(user);
 
   const result = await  user.save().then(()=>{
     res.status(200).json({
