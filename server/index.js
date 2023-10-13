@@ -20,6 +20,10 @@ mongoose.connect(config.mongoURI, {}).then(() => console.log('MongoDB Connected.
 
 app.get('/', (req, res) => res.send('ㅎㅇㅎㅇㅎㅇㅎㅇ'));
 
+app.get('/api/hello', (req, res) => {
+  res.send('안녕하세요');
+});
+
 app.post('/api/users/register', async (req, res) => {
 
   //회원가입 할 떄 필요한 정보들을 client에서 가져오며
@@ -89,14 +93,14 @@ app.post("/api/users/auth", auth, (req, res) => {
 
 app.get('/api/users/logout', auth, (req, res) => {
   // console.log('req.user', req.user);
-  User.findOneAndUpdate({_id: req.user._id}, {token: ""})
-  .then(() => {
-    console.log("user_id",req.user._id)
-    return res.status(200).send({success: true});
-  })
-  .catch((err) =>{
-    return res.json({success: false, err});
-  })
+  User.findOneAndUpdate({ _id: req.user._id }, { token: "" })
+    .then(() => {
+      console.log("user_id", req.user._id)
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    })
 
   console.log("updated token", req.user.token);
 })
