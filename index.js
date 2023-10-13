@@ -85,8 +85,20 @@ app.post("/api/users/auth", auth, (req, res) => {
     role: req.user.role,
     image: req.user.image,
   })
+})
 
+app.get('/api/users/logout', auth, (req, res) => {
+  // console.log('req.user', req.user);
+  User.findOneAndUpdate({_id: req.user._id}, {token: ""})
+  .then(() => {
+    console.log("user_id",req.user._id)
+    return res.status(200).send({success: true});
+  })
+  .catch((err) =>{
+    return res.json({success: false, err});
+  })
 
+  console.log("updated token", req.user.token);
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
