@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../../_actions/user_action";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function RegisterPage(props) {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ function RegisterPage(props) {
   const [Name, setName] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
@@ -45,7 +45,7 @@ function RegisterPage(props) {
     dispatch(registerUser(body))
     .then(response => {
       if(response.payload.success){
-        // navigate('/login');
+        navigate('/login');
       }
       else{
         alert('Failed to sign up');
